@@ -1,0 +1,208 @@
+<!-- views/medico_dashboard.html -->
+<div class="fade-in h-100">
+    <div class="row align-items-center mb-4 g-3">
+        <div class="col-12 col-lg-10">
+            <div class="d-flex align-items-center gap-3 mb-1">
+                <button class="btn btn-light border shadow-sm rounded-circle" id="btn-prev-day">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <h3 class="fw-bold mb-0 text-capitalize" id="fecha-actual">Cargando fecha...</h3>
+                <button class="btn btn-light border shadow-sm rounded-circle" id="btn-next-day">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+            <p class="text-muted mb-0" id="resumen-citas">Tienes 0 citas programadas para hoy.</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Schedule Sidebar -->
+        <div class="col-12 col-lg-4">
+            <div class="glass-card p-3 h-100 d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-center mb-4 px-2">
+                    <h6 class="fw-bold mb-0">Agenda</h6>
+                    <div class="input-group input-group-sm w-50">
+                        <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                        <input type="text" class="form-control border-start-0" placeholder="Buscar..." id="buscar-paciente">
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column gap-3 overflow-auto pe-2" style="max-height: 600px;" id="contenedor-agenda">
+                    <!-- Las citas se cargarán dinámicamente aquí -->
+                    <div class="text-center p-5 text-muted">
+                        <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                        Cargando agenda...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Patient Detail -->
+        <div class="col-12 col-lg-8">
+             <div class="glass-card p-5 h-100 d-flex flex-column shadow-lg" id="detalle-paciente-vacio">
+                <div class="d-flex flex-column align-items-center justify-content-center h-100 text-muted">
+                    <i class="bi bi-person-bounding-box fs-1 mb-3 opacity-25"></i>
+                    <h5>Selecciona un paciente de la agenda</h5>
+                    <p class="small">Haz clic en una cita para ver el informe detallado</p>
+                </div>
+             </div>
+
+             <div class="glass-card p-5 h-100 d-flex flex-column shadow-lg d-none" id="detalle-paciente-contenido">
+                 <!-- Aquí se inyectará el template -->
+             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Template para Ítem de Agenda -->
+<template id="template-item-agenda">
+    <div class="border rounded-4 p-3 bg-white transition-hover agenda-item">
+        <div class="d-flex justify-content-between mb-2">
+            <span class="badge rounded-pill px-3 py-1 fw-bold item-hora"></span>
+            <span class="small text-muted fw-bold item-viendo d-none">Viendo</span>
+        </div>
+        <h6 class="mb-1 fw-bold item-paciente"></h6>
+        <p class="small text-muted mb-0 item-motivo"></p>
+    </div>
+</template>
+
+<!-- Template para el Informe del Paciente -->
+<template id="template-informe-paciente">
+    <div class="d-flex justify-content-between align-items-start border-bottom pb-4 mb-4">
+        <div class="d-flex gap-4 align-items-center">
+            <div>
+                <h2 class="fw-bold mb-1 t-nombre-paciente"></h2>
+                <div class="d-flex gap-3">
+                    <span class="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-25 px-2 py-1 t-info-sangre"></span>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary border rounded-pill px-3 py-2 fw-bold shadow-sm d-flex align-items-center gap-2 t-btn-editar-informe">
+                <i class="bi bi-pencil-square"></i> Editar Informe
+            </button>
+        </div>
+    </div>
+
+    <!-- Apartado de Alergias -->
+    <div class="mb-4">
+       <h6 class="fw-bold text-uppercase small text-muted mb-3"><i class="bi bi-exclamation-triangle me-2 text-danger"></i> Alergias Conocidas</h6>
+       <div class="bg-danger bg-opacity-10 p-3 rounded-4 border border-danger border-opacity-25">
+           <p class="text-danger small mb-0 fw-bold t-alergias-paciente"></p>
+       </div>
+    </div>
+
+    <h6 class="fw-bold text-uppercase small text-muted mb-3">Seguimiento de Vitales y Biometría</h6>
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="p-3 border rounded-4 bg-light text-center shadow-sm h-100">
+                <p class="small text-muted fw-bold mb-1">ALTURA</p>
+                <h4 class="fw-bold mb-0"><span class="t-vital-altura"></span> <small class="text-muted fw-normal fs-6">cm</small></h4>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="p-3 border rounded-4 bg-light text-center shadow-sm h-100">
+                <p class="small text-muted fw-bold mb-1">PESO</p>
+                <h4 class="fw-bold mb-0"><span class="t-vital-peso"></span> <small class="text-muted fw-normal fs-6">kg</small></h4>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="p-3 border rounded-4 bg-light text-center shadow-sm h-100">
+                <p class="small text-muted fw-bold mb-1">RESPIRACIÓN</p>
+                <h4 class="fw-bold mb-0"><span class="t-vital-respiracion"></span> <small class="text-muted fw-normal fs-6">rpm</small></h4>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="p-3 border rounded-4 bg-primary bg-opacity-10 text-primary text-center shadow-sm border-primary border-opacity-25 h-100">
+                <p class="small fw-bold mb-1">PRESIÓN ART.</p>
+                <h4 class="fw-bold mb-0 t-vital-presion" style="font-size: 1.1rem;"></h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+         <div class="d-flex justify-content-between align-items-center mb-3">
+             <h6 class="fw-bold mb-0"></i> Observaciones Clínicas</h6>
+         </div>
+         <div class="bg-light p-4 rounded-4 border position-relative">
+             <p class="text-muted small mb-0 t-observaciones-paciente"></p>
+         </div>
+         <div class="d-flex justify-content-end gap-3 mt-4">
+             <button class="btn btn-danger px-4 py-2 fw-bold shadow-sm t-btn-cancelar-cita">Cancelar Cita</button>
+             <button class="btn btn-primary px-4 py-2 fw-bold shadow-sm t-btn-finalizar-chequeo">Firmar y Finalizar Chequeo <i class="bi bi-check2-circle ms-2"></i></button>
+         </div>
+    </div>
+</template>
+
+<!-- Template para el Formulario de Informe -->
+<template id="template-formulario-informe">
+    <div class="d-flex justify-content-between align-items-start border-bottom pb-4 mb-4">
+        <div class="d-flex gap-4 align-items-center">
+            <div>
+                <h2 class="fw-bold mb-1 t-nombre-paciente"></h2>
+                <div class="d-flex gap-3">
+                    <span class="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-25 px-2 py-1 t-info-sangre"></span>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex gap-2">
+            <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2 rounded-pill">
+                <i class="bi bi-check-circle-fill me-1"></i> Expediente Activo
+            </span>
+        </div>
+    </div>
+
+    <!-- Apartado de Alergias (Solo lectura) -->
+    <div class="mb-4">
+       <h6 class="fw-bold text-uppercase small text-muted mb-3"><i class="bi bi-exclamation-triangle me-2 text-danger"></i> Alergias Conocidas</h6>
+       <div class="bg-danger bg-opacity-10 p-3 rounded-4 border border-danger border-opacity-25">
+           <p class="text-danger small mb-0 fw-bold t-alergias-paciente"></p>
+       </div>
+    </div>
+
+    <form id="form-actualizar-informe">
+        <h6 class="fw-bold text-uppercase small text-muted mb-3">Actualización de Vitales</h6>
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-md-3">
+                <div class="p-3 border rounded-4 bg-light shadow-sm h-100">
+                    <label class="small text-muted fw-bold mb-1 d-block">ALTURA (cm)</label>
+                    <input type="number" class="form-control form-control-sm border-0 bg-transparent fw-bold fs-5 p-0 t-input-altura" required>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-3 border rounded-4 bg-light shadow-sm h-100">
+                    <label class="small text-muted fw-bold mb-1 d-block">PESO (kg)</label>
+                    <input type="number" class="form-control form-control-sm border-0 bg-transparent fw-bold fs-5 p-0 t-input-peso" required>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-3 border rounded-4 bg-light shadow-sm h-100">
+                    <label class="small text-muted fw-bold mb-1 d-block">RESPIRACIÓN (rpm)</label>
+                    <input type="number" class="form-control form-control-sm border-0 bg-transparent fw-bold fs-5 p-0 t-input-respiracion" required>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-3 border rounded-4 bg-primary bg-opacity-10 text-primary shadow-sm border-primary border-opacity-25 h-100">
+                    <label class="small fw-bold mb-1 d-block">PRESIÓN ART.</label>
+                    <input type="text" class="form-control form-control-sm border-0 bg-transparent text-primary fw-bold fs-5 p-0 t-input-presion" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+             <div class="d-flex justify-content-between align-items-center mb-3">
+                 <h6 class="fw-bold mb-0"><i class="bi bi-pencil-square me-2 text-primary"></i> Observaciones Clínicas</h6>
+                 <button type="button" class="btn btn-sm btn-outline-primary border-0 rounded-pill px-3 shadow-sm" id="btn-ai-suggest">
+                     <i class="bi bi-magic me-1"></i> Sugerencia IA
+                 </button>
+             </div>
+             <div class="bg-light p-2 rounded-4 border">
+                 <textarea class="form-control border-0 bg-transparent t-textarea-observaciones" rows="5" placeholder="Escribe aquí las observaciones clínicas..."></textarea>
+             </div>
+             <div class="d-flex justify-content-end gap-3 mt-4">
+                 <button type="button" class="btn btn-outline-secondary px-4 py-2 fw-bold" data-bs-dismiss="modal">Cancelar</button>
+                 <button type="submit" class="btn btn-primary px-4 py-2 fw-bold shadow-sm">Guardar Cambios <i class="bi bi-save ms-2"></i></button>
+             </div>
+        </div>
+    </form>
+</template>

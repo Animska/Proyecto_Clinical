@@ -1,0 +1,68 @@
+<!-- views/paciente_dashboard.html -->
+<div class="fade-in">
+    <div class="row align-items-center mb-4 g-3">
+        <div class="col-12 col-md-8">
+            <h3 class="fw-bold mb-1">Bienvenido de nuevo, <span id="nombre-paciente-dashboard">Paciente</span></h3>
+            <p class="text-muted mb-0" id="resumen-citas-paciente">Cargando tus próximas citas...</p>
+        </div>
+        <div class="col-12 col-md-4 text-md-end">
+            <button class="btn btn-primary shadow-sm w-100 w-md-auto" id="btn-nav-request">
+                <i class="bi bi-plus-lg me-1"></i> Nueva Cita
+            </button>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-12 col-lg-8 d-flex flex-column gap-3">
+            <div class="glass-card p-4 flex-grow-1">
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+                    <h6 class="fw-semibold mb-0">Citas Activas</h6>
+                    <a href="#" id="btn-nav-calendar" class="text-primary text-decoration-none small">Ver Calendario Completo</a>
+                </div>
+
+                <div id="container-citas-activas">
+                    <!-- Las citas se cargarán dinámicamente aquí -->
+                    <div class="text-center py-4 text-muted">
+                        <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                        Cargando citas...
+                    </div>
+                </div>
+
+                <h6 class="fw-semibold mt-4 mb-3">Historial Reciente</h6>
+                <div id="container-historial-paciente">
+                    <div class="border rounded-3 p-3 bg-white mb-2 d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-0 small fw-bold">Dr. David Moore</h6>
+                            <p class="small text-muted mb-0">Chequeo General &bull; 15 de Marzo, 2023</p>
+                        </div>
+                        <span class="text-primary small cursor-pointer">Ver Informe</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Template para Cita Individual -->
+<template id="tmpl-cita-paciente">
+    <div class="border rounded-3 p-3 mb-3 d-flex align-items-center bg-white shadow-sm transition-hover">
+        <div class="bg-primary bg-opacity-10 text-primary p-3 rounded-3 text-center me-3" style="width: 70px;">
+            <div class="fw-bold fs-5 item-dia"></div>
+            <div class="small fw-semibold text-uppercase item-mes"></div>
+        </div>
+        <div class="flex-grow-1">
+            <div class="d-flex justify-content-between">
+                <h6 class="mb-1 fw-bold item-motivo"></h6>
+                <span class="badge bg-opacity-10 px-2 py-1 rounded-pill item-estado"></span>
+            </div>
+            <p class="text-muted small mb-2">
+                <i class="bi bi-person me-1"></i> <span class="item-medico"></span> &bull; <span class="item-hora"></span>
+            </p>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-danger px-3 item-btn-cancelar">
+                    <i class="bi bi-trash me-1"></i> Cancelar visita
+                </button>
+            </div>
+        </div>
+    </div>
+</template>

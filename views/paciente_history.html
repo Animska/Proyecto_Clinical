@@ -1,0 +1,48 @@
+<!-- views/paciente_history.html -->
+<div class="fade-in">
+    <div class="row align-items-center mb-4">
+        <div class="col-md-8">
+            <h3 class="fw-bold mb-1">Historial de Citas</h3>
+            <p class="text-muted">Consulta todas tus consultas pasadas y futuras.</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <button class="btn btn-outline-primary shadow-sm" id="btn-back-to-dashboard">
+                <i class="bi bi-arrow-left me-1"></i> Volver al Dashboard
+            </button>
+        </div>
+    </div>
+
+    <div class="glass-card p-4">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Fecha y Hora</th>
+                        <th>Médico</th>
+                        <th>Motivo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="table-history-body">
+                    <!-- Los datos se cargarán aquí -->
+                    <tr>
+                        <td colspan="4" class="text-center py-4">
+                            <div class="spinner-border spinner-border-sm text-primary me-2" role="status"></div>
+                            Cargando historial...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Template para Fila de Historial -->
+<template id="tmpl-history-row">
+    <tr>
+        <td class="item-fecha fw-semibold"></td>
+        <td class="item-medico"></td>
+        <td class="item-motivo text-muted small"></td>
+        <td><span class="badge rounded-pill item-estado"></span></td>
+    </tr>
+</template>

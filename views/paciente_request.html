@@ -1,0 +1,87 @@
+<!-- views/paciente_request.html -->
+<div class="glass-card p-5 h-100 fade-in d-flex flex-column">
+    <div class="d-flex align-items-center mb-4">
+        <button class="btn btn-light text-secondary me-3 shadow-none border" id="btn-back-to-dashboard">
+            <i class="bi bi-arrow-left"></i>
+        </button>
+        <div>
+            <h3 class="fw-bold text-primary mb-1">Solicitud de Consulta</h3>
+            <p class="text-muted mb-0">Configura la próxima sesión del paciente con nosotros.</p>
+        </div>
+    </div>
+
+    <form id="consultation-form" class="row g-4 mt-3 flex-grow-1">
+        <div class="col-12 col-lg-7">
+            <h6 class="fw-bold mb-3 text-uppercase small text-muted">1. Motivo de la Visita</h6>
+            <div class="row g-3 mb-4">
+                <div class="col-12 col-sm-4">
+                    <label class="border rounded-3 p-3 h-100 w-100 text-center cursor-pointer border-primary bg-primary bg-opacity-10 transition d-block">
+                        <input type="radio" name="visitType" value="Examen General" class="d-none" checked>
+                        <i class="bi bi-person-check fs-4 text-primary d-block mb-1"></i>
+                        <span class="fw-semibold text-primary">Examen General</span>
+                        <span class="text-muted small d-block">30 Minutos</span>
+                    </label>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <label class="border rounded-3 p-3 h-100 w-100 text-center cursor-pointer text-muted transition hover-bg-light d-block">
+                        <input type="radio" name="visitType" value="Tratamiento" class="d-none">
+                        <i class="bi bi-bandaid fs-4 d-block mb-1"></i>
+                        <span class="fw-medium">Tratamiento</span>
+                        <span class="text-muted small d-block">1 Hora</span>
+                    </label>
+                </div>
+                <div class="col-12 col-sm-4">
+                    <label class="border rounded-3 p-3 h-100 w-100 text-center cursor-pointer text-muted transition hover-bg-light d-block">
+                        <input type="radio" name="visitType" value="Operación" class="d-none">
+                        <i class="bi bi-heart-pulse fs-4 d-block mb-1"></i>
+                        <span class="fw-medium">Operación</span>
+                        <span class="text-muted small d-block">2 Horas</span>
+                    </label>
+                </div>
+            </div>
+
+            <h6 class="fw-bold mb-3 text-uppercase small text-muted">2. Horario y Ubicación Preferidos</h6>
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label class="form-label small fw-medium text-muted">Seleccionar Fecha</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0"><i class="bi bi-calendar-event text-muted"></i></span>
+                        <input type="date" id="appointment-date" class="form-control border-start-0" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label small fw-medium text-muted">Franja Horaria</label>
+                    <select id="appointment-time" class="form-select" required>
+                        <option value="" disabled selected>Selecciona una fecha primero</option>
+                    </select>
+                </div>
+            </div>
+
+            <h6 class="fw-bold mb-3 text-uppercase small text-muted">3. Síntomas / Notas</h6>
+            <div class="mb-4">
+                <textarea id="appointment-symptoms" class="form-control" rows="5" placeholder="Por favor, describe cualquier síntoma o preocupación adicional..." required></textarea>
+            </div>
+
+            <div class="form-check form-switch bg-warning bg-opacity-10 border border-warning rounded-3 p-3 d-flex gap-3 align-items-center mb-4 ps-5">
+                <input class="form-check-input ms-0 me-3 mt-0" type="checkbox" id="appointment-priority" style="width: 2.5em; height: 1.25em;">
+                <div>
+                    <h6 class="mb-0 fw-bold text-dark">Marcar como Prioridad Alta</h6>
+                    <span class="small text-muted">Usa esto SOLO para casos clínicos urgentes.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-5 d-flex flex-column">
+            <div class="bg-light p-4 rounded-4 border flex-grow-1 mb-4 shadow-sm" id="ai-chat-container" style="min-height: 200px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+                <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-robot me-2"></i>Asistente Inteligente</h5>
+                <div id="ai-response-text" class="text-muted small">
+                    <p class="mb-0">¡Hola! Selecciona una fecha y motivo de consulta para que pueda recomendarte la mejor hora según tu disponibilidad y la de nuestros especialistas.</p>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100 py-3 rounded-4 fw-bold shadow transition-all hover-lift">
+                <i class="bi bi-calendar-check me-2"></i> Confirmar Solicitud de Cita
+            </button>
+        </div>
+    </form>
+</div>

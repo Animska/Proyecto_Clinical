@@ -1,0 +1,68 @@
+<!-- views/admin_calendar.html -->
+<div class="fade-in h-100 d-flex flex-column">
+    <div class="row align-items-center mb-4">
+         <div class="col-md-8">
+             <h3 class="fw-bold mb-1">Revisión de Citas</h3>
+             <p class="text-muted mb-0">Gestiona las solicitudes de consulta entrantes y organiza la agenda quirúrgica diaria.</p>
+         </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-12 col-lg-9 d-flex flex-column">
+            <div class="glass-card p-4 shadow-sm bg-white overflow-auto">
+                <div id="calendar-admin" style="min-width: 600px;"></div>
+            </div>
+            <p class="text-muted small mt-2 d-lg-none"><i class="bi bi-info-circle me-1"></i> Desliza para ver el calendario completo</p>
+        </div>
+
+        <div class="col-12 col-lg-3 d-flex flex-column">
+            <div class="glass-card p-4 h-100 d-flex flex-column shadow-sm overflow-y">
+                <h6 class="fw-bold mb-4 border-bottom pb-2">Solicitudes Entrantes</h6>
+                <div class="d-flex flex-column gap-3 flex-grow-1 overflow-auto p-4" id="contenedor-solicitudes" style="min-height: 0;">
+                     <!-- Las solicitudes se cargarán dinámicamente aquí -->
+                     <div class="text-center p-4 text-muted small">
+                         <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                         Cargando solicitudes...
+                     </div>
+                </div>
+
+                <div class="mt-4 bg-primary bg-opacity-10 border border-primary border-opacity-25 rounded-4 p-4 text-center position-relative" style="box-shadow: 0 -20px 25px -5px rgba(0, 0, 0, 0.05); z-index: 10;">
+                    <p class="text-muted small mb-1">Ocupación Semanal</p>
+                    <h1 class="fw-bold text-primary mb-1" id="occupancy-percentage">0%</h1>
+                    <div class="progress mb-2" style="height: 6px;">
+                        <div class="progress-bar bg-primary" id="occupancy-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Template para Solicitud Entrante -->
+<template id="template-solicitud-cita">
+    <div class="border rounded-4 p-3 bg-white position-relative shadow-sm border-light transition-hover t-solicitud-card">
+        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle shadow-sm d-none t-prioridad-badge"></span>
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <div>
+                <h6 class="mb-0 fw-bold small t-paciente-nombre"></h6>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-muted t-motivo" style="font-size:0.75rem"></span>
+                    <span class="badge rounded-pill t-prioridad-texto" style="font-size:0.65rem"></span>
+                </div>
+            </div>
+        </div>
+        <div class="text-muted mb-2" style="font-size:0.7rem">
+            <i class="bi bi-calendar3 me-1"></i> <span class="t-fecha-hora"></span>
+        </div>
+        <div class="bg-light p-2 rounded-2 mb-3 d-none t-contenedor-sintomas">
+            <p class="small mb-0 text-muted overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 0.65rem;">
+                <i class="bi bi-chat-left-text me-1"></i> <span class="t-sintomas"></span>
+            </p>
+        </div>
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary btn-sm fw-bold t-btn-aprobar">Aprobar</button>
+            <button class="btn btn-outline-danger btn-sm fw-bold t-btn-rechazar">Rechazar</button>
+        </div>
+    </div>
+</template>
+

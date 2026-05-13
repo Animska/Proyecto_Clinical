@@ -1,0 +1,183 @@
+<!-- views/admin_manage_doctors.html -->
+<div class="fade-in h-100 d-flex flex-column">
+    <div class="row align-items-center mb-4 g-3">
+        <div class="col-12 col-md-6">
+            <h3 class="fw-bold mb-1">Gestión del Personal Médico</h3>
+            <p class="text-muted mb-0 small">Añade, edita o elimina profesionales médicos del directorio clínico.</p>
+        </div>
+        <div class="col-12 col-md-6 text-md-end">
+            <button class="btn btn-primary shadow-sm w-100 w-md-auto" id="btn-add-doctor">
+                <i class="bi bi-plus-lg me-2"></i> Añadir Nuevo Médico
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats summary -->
+    <div class="row mb-4 g-3">
+        <div class="col-6 col-lg-3">
+            <div class="glass-card p-3 d-flex align-items-center gap-3 h-100">
+                <div class="stat-icon bg-primary bg-opacity-10 text-primary d-none d-sm-flex">
+                    <i class="bi bi-people"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0 fw-bold" id="stat-total-doctors">12</h5>
+                    <small class="text-muted">Total Médicos</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="glass-card p-3 d-flex align-items-center gap-3 h-100">
+                <div class="stat-icon bg-success bg-opacity-10 text-success d-none d-sm-flex">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0 fw-bold" id="stat-active-doctors">10</h5>
+                    <small class="text-muted">Activos</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="glass-card p-3 d-flex align-items-center gap-3 h-100">
+                <div class="stat-icon bg-warning bg-opacity-10 text-warning d-none d-sm-flex">
+                    <i class="bi bi-clock-history"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0 fw-bold" id="stat-leave-doctors">2</h5>
+                    <small class="text-muted">De Baja</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-lg-3">
+            <div class="glass-card p-3 d-flex align-items-center gap-3 h-100">
+                <div class="stat-icon bg-info bg-opacity-10 text-info d-none d-sm-flex">
+                    <i class="bi bi-hospital"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0 fw-bold" id="stat-specialties">5</h5>
+                    <small class="text-muted">Especialidades</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Doctors Table Container -->
+    <div class="glass-card flex-grow-1 overflow-hidden d-flex flex-column">
+        <div class="p-4 border-bottom d-flex flex-column flex-md-row align-items-md-center gap-3 bg-white bg-opacity-50">
+            <div class="input-group w-100 w-md-50">
+                <span class="input-group-text bg-transparent border-end-0"><i class="bi bi-search text-muted"></i></span>
+                <input type="text" class="form-control border-start-0" id="doctor-search" placeholder="Buscar por nombre, ID o especialidad...">
+            </div>
+            <div class="ms-md-auto d-flex gap-2">
+                <select class="form-select w-100" id="doctor-specialty-filter">
+                    <option value="">Todas las Especialidades   </option>
+                    <option>Cardiología</option>
+                    <option>Neurología</option>
+                    <option>Pediatría</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table-responsive flex-grow-1 scrollable-content">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light sticky-top">
+                    <tr>
+                        <th class="ps-4 border-0">NOMBRE DEL MÉDICO</th>
+                        <th class="border-0">ESPECIALIDAD</th>
+                        <th class="border-0">CORREO ELÉCTRONICO</th>
+                        <th class="border-0">ESTADO</th>
+                        <th class="border-0">FECHA DE INGRESO</th>
+                        <th class="text-end pe-4 border-0">ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody id="doctors-table-body">
+                    <!-- Rendered by JS -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="p-3 border-top bg-light bg-opacity-50 text-center">
+            <small class="text-muted" id="showing-count">Mostrando 1-12 de 12 miembros del personal médico</small>
+        </div>
+    </div>
+</div>
+
+<!-- Template para filas de médicos -->
+<template id="doctor-row-template">
+    <tr>
+        <td class="ps-4">
+            <div class="d-flex align-items-center gap-3">
+                <span class="fw-semibold row-name"></span>
+            </div>
+        </td>
+        <td><span class="badge bg-light text-dark border row-specialty"></span></td>
+        <td class="text-muted small row-email"></td>
+        <td>
+            <span class="badge rounded-pill row-status"></span>
+        </td>
+        <td class="text-muted small row-date"></td>
+        <td class="text-end pe-4">
+            <button class="btn btn-sm btn-light p-1 px-2 me-1 btn-edit"><i class="bi bi-pencil small"></i></button>
+            <button class="btn btn-sm btn-light text-danger p-1 px-2 btn-delete"><i class="bi bi-trash small"></i></button>
+        </td>
+    </tr>
+</template>
+
+<!-- Modal for Add/Edit Doctor -->
+<div class="modal fade" id="doctorModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold" id="modalTitle">Añadir Nuevo Médico</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="doctor-form">
+                    <input type="hidden" id="edit-index" value="">
+                    
+                    <!-- Seccion de avatar eliminada -->
+
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label class="form-label small fw-semibold">Nombre Completo</label>
+                            <input type="text" class="form-control" id="doctor-name" required placeholder="Dr. Juan Pérez">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold">Especialidad</label>
+                            <select class="form-select" id="doctor-specialty" required>
+                                <option value="" selected disabled>Seleccionar...</option>
+                                <option>Cardiología</option>
+                                <option>Neurología</option>
+                                <option>Pediatría</option>
+                                <option>Medicina General</option>
+                                <option>Cirugía</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold">Estado</label>
+                            <select class="form-select" id="doctor-status">
+                                <option value="Activo">Activo</option>
+                                <option value="De Baja">De Baja</option>
+                                <option value="Inactivo">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold">Dirección de Correo Electrónico</label>
+                            <input type="email" class="form-control" id="doctor-email" required placeholder="juan.perez@clinica.com">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold">Contraseña de Acceso</label>
+                            <input type="password" class="form-control" id="doctor-password" required placeholder="••••••••">
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-top">
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-light flex-grow-1" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary flex-grow-1">Guardar Perfil</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

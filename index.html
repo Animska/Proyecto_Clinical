@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinica y Funeraria Rodriguez - Nuestros Pacientes, sus Muertos</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="static/favicon.png">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="static/css/style.css">
+    
+    <!-- App Modules -->
+    <script defer src="static/js/paciente.js"></script>
+    <script defer src="static/js/medico.js"></script>
+    <script defer src="static/js/admin.js"></script>
+    <script defer src="static/js/app.js"></script>
+    
+    <!-- FullCalendar 6 -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/bootstrap5@6.1.11/index.global.min.js'></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <!-- SPA Root Container -->
+    <div id="app">
+
+        <!-- 0. Layout de Landing Page (Vista de Inicio) -->
+        <div id="layout-landing" class="layout-wrapper fade-in d-none">
+            <!-- Navbar de Landing -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm sticky-top">
+                <div class="container">
+                    <a class="navbar-brand fw-bold text-primary" href="#">
+                        <i class="bi bi-heart-pulse-fill me-2"></i>Clínica y Funeraria Rodríguez
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto align-items-center gap-3">
+                            <li class="nav-item"><a class="nav-link fw-medium" href="#servicios">Servicios</a></li>
+                            <li class="nav-item"><a class="nav-link fw-medium" href="#nosotros">Nosotros</a></li>
+                            <li class="nav-item"><a class="nav-link fw-medium" href="#contacto">Contacto</a></li>
+                            <li class="nav-item ms-lg-3">
+                                <button class="btn btn-primary px-4 rounded-pill shadow-sm" id="btn-landing-login">
+                                    <i class="bi bi-person-circle me-2"></i>Acceso Clientes
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Hero Section -->
+            <header class="hero-section text-white d-flex align-items-center">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 mb-5 mb-lg-0">
+                            <h1 class="display-3 fw-bold mb-4">Cuidamos de ti y de lo que más importa.</h1>
+                            <p class="lead mb-5 opacity-90">Salud integral con tecnología de vanguardia y un equipo humano comprometido con tu bienestar. Tu salud es nuestra prioridad número uno.</p>
+                            <div class="d-flex gap-3">
+                                <button class="btn btn-light btn-lg px-4 fw-bold rounded-pill" id="btn-landing-cta">Pedir Cita Ahora</button>
+                                <button class="btn btn-outline-light btn-lg px-4 rounded-pill">Ver Especialidades</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="hero-image-container position-relative">
+                                <div class="glass-card p-4 floating-card shadow-lg border-0 bg-white bg-opacity-10 backdrop-blur">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-primary rounded-circle p-2 me-3">
+                                            <i class="bi bi-shield-check text-white"></i>
+                                        </div>
+                                        <h6 class="mb-0 text-white">Certificación Europea 2024</h6>
+                                    </div>
+                                    <p class="small text-white opacity-75 mb-0">Líderes en atención personalizada y seguridad del paciente.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Servicios Section -->
+            <section id="servicios" class="py-5 bg-light">
+                <div class="container py-5">
+                    <div class="text-center mb-5">
+                        <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3">Nuestras Especialidades</span>
+                        <h2 class="fw-bold display-5">Servicios Médicos de Excelencia</h2>
+                        <p class="text-muted mx-auto" style="max-width: 600px;">Ofrecemos una amplia gama de especialidades para cubrir todas tus necesidades de salud bajo un mismo techo.</p>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm p-4 text-center service-card">
+                                <div class="icon-box bg-primary bg-opacity-10 text-primary rounded-circle mx-auto mb-4">
+                                    <i class="bi bi-heart-pulse fs-2"></i>
+                                </div>
+                                <h4 class="fw-bold mb-3">Cardiología</h4>
+                                <p class="text-muted">Cuidado experto del corazón con diagnósticos precisos y tratamientos avanzados.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm p-4 text-center service-card">
+                                <div class="icon-box bg-primary bg-opacity-10 text-primary rounded-circle mx-auto mb-4">
+                                    <i class="bi bi-activity fs-2"></i>
+                                </div>
+                                <h4 class="fw-bold mb-3">Medicina General</h4>
+                                <p class="text-muted">Atención primaria integral para toda la familia con un enfoque preventivo.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm p-4 text-center service-card">
+                                <div class="icon-box bg-primary bg-opacity-10 text-primary rounded-circle mx-auto mb-4">
+                                    <i class="bi bi-capsule fs-2"></i>
+                                </div>
+                                <h4 class="fw-bold mb-3">Análisis Clínicos</h4>
+                                <p class="text-muted">Resultados rápidos y fiables con tecnología de laboratorio de última generación.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="bg-dark text-white py-5">
+                <div class="container">
+                    <div class="row py-4">
+                        <div class="col-lg-4 mb-4 mb-lg-0">
+                            <h5 class="fw-bold mb-4">Clínica Rodríguez</h5>
+                            <p class="opacity-75">Tu bienestar es nuestra razón de ser. Innovación y cercanía en cada consulta.</p>
+                            <div class="d-flex gap-3 mt-4">
+                                <a href="#" class="text-white opacity-75"><i class="bi bi-facebook fs-4"></i></a>
+                                <a href="#" class="text-white opacity-75"><i class="bi bi-instagram fs-4"></i></a>
+                                <a href="#" class="text-white opacity-75"><i class="bi bi-twitter-x fs-4"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 mb-4 mb-lg-0">
+                            <h6 class="fw-bold mb-4">Enlaces</h6>
+                            <ul class="list-unstyled opacity-75">
+                                <li class="mb-2"><a href="#" class="text-white text-decoration-none">Inicio</a></li>
+                                <li class="mb-2"><a href="#servicios" class="text-white text-decoration-none">Servicios</a></li>
+                                <li class="mb-2"><a href="#nosotros" class="text-white text-decoration-none">Sobre Nosotros</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-4 mb-4 mb-lg-0">
+                            <h6 class="fw-bold mb-4">Contacto</h6>
+                            <ul class="list-unstyled opacity-75">
+                                <li class="mb-2"><i class="bi bi-geo-alt me-2"></i> Calle Salud 123, Madrid</li>
+                                <li class="mb-2"><i class="bi bi-telephone me-2"></i> +34 912 345 678</li>
+                                <li class="mb-2"><i class="bi bi-envelope me-2"></i> info@rodriguez.es</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-4">
+                            <h6 class="fw-bold mb-4">Horario</h6>
+                            <ul class="list-unstyled opacity-75">
+                                <li class="mb-2">Lun - Vie: 08:00 - 20:00</li>
+                                <li class="mb-2">Sábados: 09:00 - 14:00</li>
+                                <li class="mb-2">Domingos: Cerrado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr class="opacity-25 my-4">
+                    <div class="text-center opacity-50 small">
+                        <p class="mb-0">© 2024 Clínica Rodríguez. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <!-- 1. Layout de Autenticación -->
+        <div id="layout-auth" class="layout-wrapper fade-in d-none">
+            <div class="login-wrapper">
+                <div class="glass-card login-card p-5 text-center">
+                    <div class="d-flex align-items-center justify-content-center mb-4 text-primary">
+                        <div>
+                            <h3 class="mb-0 fw-bold">Clinica y Funeraria Rodriguez</h3>
+                            <p class="text-secondary">Nuestros Pacientes. Sus Muertos</p>
+                        </div>
+
+                    </div>
+
+                    <h4 class="fw-bold mb-2">Bienvenido de nuevo</h4>
+                    <p class="text-muted small mb-4">Por favor, introduce tus credenciales para acceder al panel.</p>
+
+                    <!-- Selector de Roles para Pruebas -->
+                    <div class="d-flex justify-content-between mb-4 bg-light p-1 rounded-3">
+                        <button class="role-selector-btn active w-100" data-role="patient"><i
+                                class="bi bi-person me-1 d-block"></i><span class="d-block">Paciente</span></button>
+                        <button class="role-selector-btn w-100 mx-1" data-role="doctor"><i
+                                class="bi bi-heart-pulse me-1 d-block"></i><span class="d-block">Médico</span></button>
+                        <button class="role-selector-btn w-100" data-role="admin"><i class="bi bi-shield-lock me-1 d-block"></i><span class="d-block">Admin</span></button>
+                    </div>
+
+                    <h3 id="login-error-msg" class="text-danger d-none mb-3 fs-5"></h3>
+
+                    <form id="login-form">
+                        <div class="mb-3 text-start">
+                            <label class="form-label small fw-semibold text-muted">Correo electrónico</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-envelope text-muted"></i></span>
+                                <input type="email" id="login-email" class="form-control border-start-0 ps-0"
+                                    placeholder="user@clinical.com" value="" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4 text-start">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <label class="form-label small fw-semibold text-muted mb-0">Contraseña</label>
+                                <a href="#" class="text-primary small text-decoration-none">¿Olvidaste tu
+                                    contraseña?</a>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text bg-white"><i class="bi bi-lock text-muted"></i></span>
+                                <input type="password" id="login-password" class="form-control border-start-0 ps-0 border-end-0"
+                                    placeholder="••••••••" value="" required>
+                                <span class="input-group-text bg-white" id="toggle-login-password" style="cursor: pointer"><i
+                                        class="bi bi-eye-slash text-muted"></i></span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2">Iniciar Sesión <i
+                                class="bi bi-arrow-right ms-2"></i></button>
+                    </form>
+
+                    <div class="mt-4 pt-3 border-top">
+                        <p class="text-muted small mb-1">¿Nuevo en la clínica?</p>
+                        <a href="#" id="btn-open-register" class="text-primary fw-semibold text-decoration-none">
+                            <i class="bi bi-person-plus me-1"></i> Regístrate como Paciente
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Layout de Aplicación (Master Layout) -->
+        <div id="layout-app" class="dashboard-layout fade-in d-none ">
+            <!-- Sidebar responsive (Offcanvas en móvil, Sidebar fija en escritorio) -->
+            <aside class="sidebar-container">
+                <div class="offcanvas-lg offcanvas-start sidebar glass-card" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+                    <div class="offcanvas-header px-4 pt-4 d-lg-none">
+                        <h5 class="offcanvas-title fw-bold text-primary" id="sidebarMenuLabel">Menú</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+                    </div>
+                    <div class="sidebar-content d-flex flex-column h-100 pt-4 pb-4">
+                        <div class="px-4 d-flex align-items-center mb-5 text-primary">
+                            <div>
+                                <h3 class="mb-0 fw-bold fs-5">Clinica y Funeraria Rodriguez</h3>
+                                <p class="text-secondary small mb-0">Nuestros Pacientes. Sus Muertos</p>
+                            </div>
+                        </div>
+
+                        <nav id="sidebar-nav" class="nav flex-column px-3 gap-2 flex-grow-1">
+                            <!-- Links dinámicos se inyectan aquí -->
+                        </nav>
+
+                        <div class="mt-auto px-3">
+                            <button class="btn btn-light text-danger w-100" id="btn-global-logout">
+                                <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Contenido Principal -->
+            <main class="main-content">
+                <!-- Topbar Común -->
+                <header class="d-flex justify-content-between align-items-center bg-white px-4 py-3 rounded-4 shadow-sm">
+                    <div class="d-flex align-items-center gap-3">
+                        <!-- Botón Hamburguesa para Móvil -->
+                        <button class="btn btn-light d-lg-none shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu">
+                            <i class="bi bi-list fs-4"></i>
+                        </button>
+                        <div id="page-title-container" class="d-none d-sm-block">
+                            <h5 class="mb-0 fw-semibold text-muted" id="current-view-title">Dashboard</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="d-flex align-items-center gap-2 border-start ps-3">
+                            <div>
+                                <h6 class="mb-0 text-dark" style="font-size:0.9rem" id="global-user-name">Alex Thompson
+                                </h6>
+                                <small class="text-muted" style="font-size:0.75rem"
+                                    id="global-user-role">Paciente</small>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Área donde se cargan las vistas -->
+                <div id="view-container" class="mt-2 flex-grow-1"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal Registro Paciente -->
+    <div class="modal fade" id="patientRegisterModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold" id="modalRegisterTitle">Registro de Nuevo Paciente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted small mb-4">Únete a nuestra clínica para gestionar tus citas de forma sencilla.</p>
+                    <form id="register-patient-form">
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Nombre Completo</label>
+                            <input type="text" class="form-control" id="reg-name" placeholder="Ej. Juan Pérez" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold text-muted">DNI / NIE</label>
+                                <input type="text" class="form-control" id="reg-dni" placeholder="12345678X" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold text-muted">Teléfono</label>
+                                <input type="tel" class="form-control" id="reg-phone" placeholder="600000000" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-semibold text-muted">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="reg-email" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label small fw-semibold text-muted">Contraseña</label>
+                            <input type="password" class="form-control" id="reg-password" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2">Crear Cuenta <i class="bi bi-check2-circle ms-2"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ajustes de Perfil -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Ajustes de Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="profile-form">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold text-muted">Nombre Completo</label>
+                                <input type="text" class="form-control" id="profile-name" value="Alex Thompson" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold text-muted">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="profile-email" value="alex.t@email.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold text-muted">Teléfono</label>
+                                <input type="tel" class="form-control" id="profile-phone" value="612 345 678" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold text-muted">DNI / NIE</label>
+                                <input type="text" class="form-control" id="profile-dni" value="12345678Z" disabled>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small fw-semibold text-muted">Dirección</label>
+                                <input type="text" class="form-control" id="profile-address" value="Calle Mayor 12, Madrid">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-semibold text-muted">Grupo Sanguíneo</label>
+                                <select class="form-select" id="profile-blood">
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="O+" selected>O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label small fw-semibold text-muted">Alergias Conocidas</label>
+                                <input type="text" class="form-control" id="profile-allergies" value="Polen, Penicilina">
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-3 border-top d-flex justify-content-end gap-2">
+                            <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary px-4">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Informe Clínico (Médico) -->
+    <div class="modal fade" id="reportModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Actualizar Informe Clínico</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4" id="modal-report-body">
+                    <!-- Se inyectará el contenido dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Selección de Médico -->
+    <div class="modal fade" id="modalSeleccionarMedico" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Asignar Médico</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted small mb-3">Selecciona el profesional médico que atenderá esta consulta.</p>
+                    
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-4 border border-primary border-opacity-25 mb-4 d-none shadow-sm" id="ai-doctor-recommendation-container">
+                        <h6 class="fw-bold small text-primary mb-2"><i class="bi bi-robot me-1"></i> Sugerencia del Asistente</h6>
+                        <div id="ai-doctor-recommendation-text" class="small text-dark">
+                            <div class="spinner-border spinner-border-sm text-primary me-2" role="status"></div>
+                            <span class="text-primary fw-medium">Analizando síntomas y especialistas...</span>
+                        </div>
+                    </div>
+
+                    <div class="list-group list-group-flush" id="lista-medicos-seleccion">
+                        <!-- Los médicos se cargarán dinámicamente aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Ver Informe Clínico (Paciente) -->
+    <div class="modal fade" id="viewReportModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Informe Clínico Detallado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3">
+                                <h6 class="fw-bold mb-3"><i class="bi bi-person-badge me-2"></i>Información de Consulta</h6>
+                                <p class="mb-1 small text-muted">Médico Atendente:</p>
+                                <p class="fw-semibold mb-3" id="view-report-doctor">-</p>
+                                <p class="mb-1 small text-muted">Fecha de Cita:</p>
+                                <p class="fw-semibold mb-0" id="view-report-date">-</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3">
+                                <h6 class="fw-bold mb-3"><i class="bi bi-activity me-2"></i>Signos Vitales</h6>
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <p class="mb-0 small text-muted">Altura:</p>
+                                        <p class="fw-semibold mb-2"><span id="view-report-height">-</span> cm</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="mb-0 small text-muted">Peso:</p>
+                                        <p class="fw-semibold mb-2"><span id="view-report-weight">-</span> kg</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="mb-0 small text-muted">Resp.:</p>
+                                        <p class="fw-semibold mb-0"><span id="view-report-resp">-</span> rpm</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="mb-0 small text-muted">Presión:</p>
+                                        <p class="fw-semibold mb-0"><span id="view-report-pressure">-</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="p-3 border rounded-3 bg-white">
+                                <h6 class="fw-bold mb-3 text-primary"><i class="bi bi-journal-text me-2"></i>Observaciones Clínicas</h6>
+                                <div id="view-report-observations" class="text-muted" style="white-space: pre-wrap;">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
